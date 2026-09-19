@@ -1,0 +1,15 @@
+{
+  "name": "phonelink-signaling-server",
+  "version": "1.0.0",
+  "description": "WebSocket relay signaling server for Laptop ↔ Phone calls and SMS commands",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "keywords": ["webrtc", "signaling", "websocket", "android", "chrome-extension"],
+  "author": "",
+  "license": "MIT"
+}

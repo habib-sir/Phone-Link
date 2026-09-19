@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phone Link</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="header">
+      <div class="brand">
+        <span class="logo">⚡</span>
+        <h2>Phone Link</h2>
+      </div>
+      <div id="connectionPill" class="pill disconnected">Disconnected</div>
+    </header>
+
+    <!-- Configuration Card -->
+    <section class="card config-card">
+      <div class="form-row">
+        <label for="serverUrl">Signaling URL:</label>
+        <input type="text" id="serverUrl" placeholder="wss://your-tunnel.trycloudflare.com or ws://localhost:8080" />
+      </div>
+      <div class="form-row">
+        <label for="pairCode">6-Digit Pair Code:</label>
+        <div class="pair-row">
+          <input type="text" id="pairCode" maxlength="6" placeholder="e.g. 849201" />
+          <button id="btnConnect" class="btn btn-primary">Connect</button>
+        </div>
+      </div>
+      <div id="peerStatusText" class="status-hint">Phone status: Waiting for pair code...</div>
+    </section>
+
+    <!-- Call Control Card -->
+    <section class="card call-card">
+      <h3>Voice & Video Call</h3>
+      <div class="call-buttons">
+        <button id="btnVoiceCall" class="btn btn-call" disabled>
+          <span>📞</span> Call Phone (Voice)
+        </button>
+        <button id="btnVideoCall" class="btn btn-call btn-video" disabled>
+          <span>📹</span> Video Call
+        </button>
+      </div>
+
+      <!-- In-call container -->
+      <div id="inCallSection" class="in-call-section hidden">
+        <div class="call-header">
+          <span id="callStateLabel">Call in progress...</span>
+          <span id="callTimer">00:00</span>
+        </div>
+        <div class="video-grid">
+          <video id="remoteVideo" autoplay playsinline class="remote-video"></video>
+          <video id="localVideo" autoplay playsinline muted class="local-video"></video>
+        </div>
+        <div class="call-actions">
+          <button id="btnMuteAudio" class="btn btn-secondary">Mute Mic</button>
+          <button id="btnToggleVideo" class="btn btn-secondary">Toggle Cam</button>
+          <button id="btnEndCall" class="btn btn-danger">End Call</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SMS Command Card -->
+    <section class="card sms-card">
+      <h3>Send SMS via Phone's SIM</h3>
+      <p class="subtitle">Laptop sends command, Phone transmits real SMS via carrier.</p>
+      <div class="form-group">
+        <input type="tel" id="smsTo" placeholder="Recipient Phone Number (+88017...)" />
+      </div>
+      <div class="form-group">
+        <textarea id="smsBody" rows="2" placeholder="Write SMS content..."></textarea>
+      </div>
+      <button id="btnSendSms" class="btn btn-action" disabled>Send SMS Command</button>
+      <div id="smsStatus" class="sms-status-msg"></div>
+    </section>
+
+    <!-- In-App Chat Card -->
+    <section class="card chat-card">
+      <h3>Quick Messages (WiFi/Internet)</h3>
+      <div id="chatMessages" class="chat-log"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Type a message to phone..." />
+        <button id="btnSendChat" class="btn btn-primary" disabled>Send</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Phone Link - Laptop Client",
+  "version": "1.0.0",
+  "description": "Make free voice/video calls to your phone, send SMS via phone SIM, and chat in real-time.",
+  "permissions": [
+    "notifications",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Phone Link"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
