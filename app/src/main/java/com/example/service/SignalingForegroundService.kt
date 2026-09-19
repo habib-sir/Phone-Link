@@ -49,14 +49,23 @@ class SignalingForegroundService : Service() {
         val pairCode = intent?.getStringExtra(EXTRA_PAIR_CODE) ?: ""
 
         val notification = buildNotification("Connecting to signaling server...", false)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            startForeground(
-                NOTIFICATION_ID,
-                notification,
-                ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE
-            )
-        } else {
-            startForeground(NOTIFICATION_ID, notification)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                startForeground(
+                    NOTIFICATION_ID,
+                    notification,
+                    ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE
+                )
+            } else {
+                startForeground(NOTIFICATION_ID, notification)
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to startForeground with FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE: ${e.message}", e)
+            try {
+                startForeground(NOTIFICATION_ID, notification)
+            } catch (fallbackEx: Exception) {
+                Log.e(TAG, "Failed fallback startForeground: ${fallbackEx.message}", fallbackEx)
+            }
         }
 
         if (pairCode.isNotEmpty()) {
